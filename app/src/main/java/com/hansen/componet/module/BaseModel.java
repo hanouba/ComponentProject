@@ -6,7 +6,7 @@ import java.io.Serializable;
  * @author HanN on 2019/12/5 13:17
  * @email: 1356548475@qq.com
  * @project componet
- * @description:
+ * @description: 实体解析规则,根据json一层一层创建实体对象
  * @updateuser:
  * @updatedata: 2019/12/5 13:17
  * @updateremark:

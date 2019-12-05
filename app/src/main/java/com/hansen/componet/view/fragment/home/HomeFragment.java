@@ -2,7 +2,6 @@ package com.hansen.componet.view.fragment.home;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.telephony.VisualVoicemailService;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hansen.componet.R;
+import com.hansen.componet.module.recommand.BaseRecommandModel;
 import com.hansen.componet.network.http.RequestCenter;
 import com.hansen.componet.view.fragment.BaseFragment;
 import com.hansen.hansensdk.okhttp.listener.DisposeDataListener;
@@ -41,6 +41,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     private TextView mCategoryView;
     private TextView mSearchView;
     private ImageView mLoadingView;
+
+    /**
+     * 数据
+     */
+    private BaseRecommandModel mBaseRecommandModel;
+
     public HomeFragment() {
     }
 
@@ -68,6 +74,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             @Override
             public void onSuccess(Object responseObj) {
                 Log.v(TAG,responseObj.toString());
+                /**
+                 * 获取数据后更新ui
+                 */
+                mBaseRecommandModel = (BaseRecommandModel) responseObj;
+
+                showSucessView();
             }
 
             @Override
@@ -75,6 +87,28 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
             }
         });
+    }
+
+    /**
+     * 请求成功后的方法
+     */
+    private void showSucessView() {
+        //判断数据是否为空
+        if (mBaseRecommandModel.data.list != null && mBaseRecommandModel.data.list.size() > 0) {
+            mLoadingView.setVisibility(View.GONE);
+            mListView.setVisibility(View.VISIBLE);
+            //创建adapter
+
+        }else {
+            showErrorView();
+        }
+    }
+
+    /**
+     * 请求失败后的方法
+     */
+    private void showErrorView() {
+
     }
 
     private void initView() {
