@@ -3,6 +3,7 @@ package com.hansen.componet.view.fragment.home;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.telephony.VisualVoicemailService;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hansen.componet.R;
+import com.hansen.componet.network.http.RequestCenter;
 import com.hansen.componet.view.fragment.BaseFragment;
+import com.hansen.hansensdk.okhttp.listener.DisposeDataListener;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,7 +31,7 @@ import androidx.annotation.Nullable;
  * @version: 2.1.67
  */
 public class HomeFragment extends BaseFragment implements View.OnClickListener, AdapterView.OnItemClickListener {
-
+    private static final String TAG = "HomeFragmentTAG";
     /**
      * UI
      */
@@ -44,12 +47,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestRecommandData();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mContext = getActivity();
+
         mContentView = inflater.inflate(R.layout.fragment_home_layout, container, false);
         initView();
         return mContentView;
@@ -59,7 +64,17 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
      * 发送首页列表数据请求
      */
     private void requestRecommandData() {
+        RequestCenter.requestRecommandData(new DisposeDataListener() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                Log.v(TAG,responseObj.toString());
+            }
 
+            @Override
+            public void onFailure(Object responseObj) {
+
+            }
+        });
     }
 
     private void initView() {

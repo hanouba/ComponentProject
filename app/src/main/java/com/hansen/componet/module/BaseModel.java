@@ -12,6 +12,6 @@ import java.io.Serializable;
  * @updateremark:
  * @version: 2.1.67
  */
-public class BaseModel extends Serializable {
+public class BaseModel implements Serializable {
     private static final long serialVersionUID = 1L;
 }

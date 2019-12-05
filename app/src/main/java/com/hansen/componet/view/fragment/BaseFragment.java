@@ -23,8 +23,11 @@ import androidx.fragment.app.Fragment;
  */
 public class BaseFragment extends Fragment {
     protected Activity mContext;
-
-    public void requestPermission(int code,String... permissions) {
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+    public void requestPermission(int code, String... permissions) {
         if (Build.VERSION.PREVIEW_SDK_INT >= 23) {
             requestPermissions(permissions, code);
         }
