@@ -2,6 +2,7 @@ package com.hansen.componet.view.fragment.home;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.telephony.VisualVoicemailService;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         mContentView = inflater.inflate(R.layout.fragment_home_layout, container, false);
         initView();
         return mContentView;
+    }
+
+    /**
+     * 发送首页列表数据请求
+     */
+    private void requestRecommandData() {
+
     }
 
     private void initView() {

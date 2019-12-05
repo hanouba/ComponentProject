@@ -1,6 +1,7 @@
 package com.hansen.hansensdk.okhttp;
 
 import com.hansen.hansensdk.okhttp.https.HttpsUtils;
+import com.hansen.hansensdk.okhttp.listener.DisposeDataHandle;
 import com.hansen.hansensdk.okhttp.response.CommonJsonCallback;
 
 import java.util.concurrent.TimeUnit;
@@ -59,6 +60,11 @@ public class CommonOkHttpClient {
 
     }
 
+    public static OkHttpClient getmOkHttpClient() {
+        return mOkHttpClient;
+    }
+
+
     /**
      * 发送具体的http/https请求
      * static 正确使用的情况下不会导致内存泄露
@@ -70,6 +76,24 @@ public class CommonOkHttpClient {
     public static Call sendRequest(Request request, CommonJsonCallback commCallBack) {
         Call call = mOkHttpClient.newCall(request);
         call.enqueue(commCallBack);
+        return call;
+    }
+
+    /**
+     * 通过构造好的Request,Callback去发送请求
+     *
+     * @param request
+     * @param handle
+     */
+    public static Call get(Request request, DisposeDataHandle handle) {
+        Call call = mOkHttpClient.newCall(request);
+        call.enqueue(new CommonJsonCallback(handle));
+        return call;
+    }
+
+    public static Call post(Request request, DisposeDataHandle handle) {
+        Call call = mOkHttpClient.newCall(request);
+        call.enqueue(new CommonJsonCallback(handle));
         return call;
     }
 }

@@ -5,6 +5,7 @@ import android.icu.util.ULocale;
 import java.util.Map;
 
 import okhttp3.FormBody;
+import okhttp3.Headers;
 import okhttp3.Request;
 
 /**
@@ -44,7 +45,7 @@ public class CommonRequest {
      * @param params
      * @return 通过传入的参数, 返回一个get类型的请求
      */
-    public static Request createGetReequest(String url, RequestParams params) {
+    public static Request createGetRequest(String url, RequestParams params,RequestParams headers) {
         StringBuilder urlStringBuild = new StringBuilder(url).append("?");
         if (params != null) {
             for (Map.Entry<String, String> entry : params.urlParams.entrySet()) {
@@ -55,7 +56,31 @@ public class CommonRequest {
             }
 
         }
+        //添加请求头
+        Headers.Builder mHeaderBuild = new Headers.Builder();
+        if (headers != null) {
+            for (Map.Entry<String,String> entry : headers.urlParams.entrySet()) {
+                mHeaderBuild.add(entry.getKey(),entry.getValue());
+            }
+        }
+        Headers mHeader = mHeaderBuild.build();
+
         return new Request.Builder().url(urlStringBuild.substring(0, urlStringBuild.length() - 1))
-                .get().build();
+                .get()
+                .headers(mHeader)
+                .build();
+    }
+
+
+    /**
+     * ressemble the params to the url
+     *
+     * @param url
+     * @param params
+     * @return
+     */
+    public static Request createGetRequest(String url, RequestParams params) {
+
+        return createGetRequest(url, params, null);
     }
 }
