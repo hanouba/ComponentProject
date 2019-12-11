@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hansen.componet.R;
+import com.hansen.componet.adapter.CourseAdapter;
 import com.hansen.componet.module.recommand.BaseRecommandModel;
 import com.hansen.componet.network.http.RequestCenter;
 import com.hansen.componet.view.fragment.BaseFragment;
@@ -46,6 +47,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
      * 数据
      */
     private BaseRecommandModel mBaseRecommandModel;
+    private CourseAdapter mCourseAdapter;
 
     public HomeFragment() {
     }
@@ -77,7 +79,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                 /**
                  * 获取数据后更新ui
                  */
-                mBaseRecommandModel = (BaseRecommandModel) responseObj;
+//                mBaseRecommandModel = (BaseRecommandModel) responseObj;
 
                 showSucessView();
             }
@@ -98,7 +100,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             mLoadingView.setVisibility(View.GONE);
             mListView.setVisibility(View.VISIBLE);
             //创建adapter
-
+            mCourseAdapter = new CourseAdapter(getContext(),mBaseRecommandModel.data.list);
+            mListView.setAdapter(mCourseAdapter);
         }else {
             showErrorView();
         }

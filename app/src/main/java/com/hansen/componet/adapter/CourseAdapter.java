@@ -31,7 +31,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @author HanN on 2019/12/5 14:16
  * @email: 1356548475@qq.com
  * @project componet
- * @description:
+ * @description: 开发优先选择listview
  * @updateuser:
  * @updatedata: 2019/12/5 14:16
  * @updateremark:
@@ -53,8 +53,17 @@ public class CourseAdapter extends BaseAdapter {
     private ArrayList<RecommandBodyValue> mData;
     private ViewHolder mViewHolder;
     private VideoAdContext mAdsdkContext;
+    /**
+     *
+     * 异步图片加载工具
+     */
     private ImageLoaderManager mImagerLoader;
 
+    /**
+     * 构造方法
+     * @param context
+     * @param data
+     */
     public CourseAdapter(Context context, ArrayList<RecommandBodyValue> data) {
         mContext = context;
         mData = data;
@@ -91,9 +100,12 @@ public class CourseAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        //获取类型 根据类型显示不同的item
         int type = getItemViewType(position);
+        //获取item对应的数据
         final RecommandBodyValue value = (RecommandBodyValue) getItem(position);
         //无tag时
+        //是时候item的界面
         if (convertView == null) {
             switch (type) {
                 case VIDOE_TYPE:
@@ -168,6 +180,7 @@ public class CourseAdapter extends BaseAdapter {
             mViewHolder = (ViewHolder) convertView.getTag();
         }
         //填充item的数据
+        //为item绑定数据
         switch (type) {
             case VIDOE_TYPE:
                 mImagerLoader.displayImage(mViewHolder.mLogoView, value.logo);
@@ -247,6 +260,9 @@ public class CourseAdapter extends BaseAdapter {
         return photoView;
     }
 
+    /**
+     * 缓存我们创建好的item
+     */
     private static class ViewHolder {
         //所有Card共有属性
         private CircleImageView mLogoView;

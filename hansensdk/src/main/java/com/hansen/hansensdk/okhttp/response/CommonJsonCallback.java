@@ -3,7 +3,7 @@ package com.hansen.hansensdk.okhttp.response;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.hansen.hansensdk.adutil.ResponseEntityToModule;
+import com.google.gson.Gson;
 import com.hansen.hansensdk.okhttp.exception.OkHttpException;
 import com.hansen.hansensdk.okhttp.listener.DisposeDataHandle;
 import com.hansen.hansensdk.okhttp.listener.DisposeDataListener;
@@ -96,7 +96,9 @@ public class CommonJsonCallback implements Callback {
                         mListener.onSuccess(responseObj);
                     }else {
                         //需要将json转化
-                        Object object = ResponseEntityToModule.parseJsonObjectToModule(result,mClass);
+//                        Object object = ResponseEntityToModule.parseJsonObjectToModule(result,mClass);
+                        Gson gson = new Gson();
+                        Object object = gson.fromJson(responseObj.toString(), mClass);
                         if (object != null) {
                             mListener.onSuccess(object);
                         }else {
