@@ -1,6 +1,8 @@
 package com.hansen.componet.module.recommand;
 
 import com.hansen.componet.module.BaseModel;
+import com.hansen.hansensdk.module.monitor.Monitor;
+import com.hansen.hansensdk.module.monitor.emevent.EMEvent;
 
 import java.util.ArrayList;
 
@@ -37,7 +39,19 @@ public class RecommandBodyValue extends BaseModel {
     public String text;
     public String from;
     public String zan;
+    public String site;
     public ArrayList<String> url;
 
+    //视频专用
+    public String thumb;
+    public String resource;
+    public String resourceID;
+    public String adid;
+    public ArrayList<Monitor> startMonitor;
+    public ArrayList<Monitor> middleMonitor;
+    public ArrayList<Monitor> endMonitor;
+    public String clickUrl;
+    public ArrayList<Monitor> clickMonitor;
+    public EMEvent event;
 
 }

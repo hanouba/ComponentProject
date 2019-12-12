@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.hansen.componet.R;
 import com.hansen.componet.adapter.CourseAdapter;
 import com.hansen.componet.module.recommand.BaseRecommandModel;
@@ -79,7 +80,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                 /**
                  * 获取数据后更新ui
                  */
-//                mBaseRecommandModel = (BaseRecommandModel) responseObj;
+                Gson gson = new Gson();
+               mBaseRecommandModel = gson.fromJson(responseObj.toString(), BaseRecommandModel.class);
+
 
                 showSucessView();
             }
