@@ -38,6 +38,11 @@ public class Utils {
         return (int) (pxValue / scale);
     }
 
+    /**
+     * 屏幕显示区域
+     * @param pView
+     * @return
+     */
     public static int getVisiblePercent(View pView) {
         if (pView != null && pView.isShown()) {
             DisplayMetrics displayMetrics = pView.getContext().getResources().getDisplayMetrics();
@@ -70,7 +75,12 @@ public class Utils {
         return false;
     }
 
-    //decide can autoplay the ad
+    /**
+     * 是否自动播放
+     * @param context 用来判断WiFi是否可用
+     * @param setting 枚举值来判断那种状态
+     * @return
+     */
     public static boolean canAutoPlay(Context context, SDKConstant.AutoPlaySetting setting) {
         boolean result = true;
         switch (setting) {
