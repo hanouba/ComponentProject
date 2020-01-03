@@ -273,7 +273,7 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
      * @param mp
      * @param what
      * @param extra
-     * @return
+     * @return true 代表自己处理了异常 系统不会再处理了
      */
     @Override
     public boolean onError(MediaPlayer mp, int what, int extra) {
@@ -630,7 +630,7 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
     }
 
     /**
-     * 表明我们的textureview准备好了
+     * 表明我们的textureview准备好了 才可也load 数据 不可以在构造方法里面load数据
      * @param surface
      * @param width
      * @param height
